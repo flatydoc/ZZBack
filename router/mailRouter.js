@@ -7,7 +7,6 @@ let mailController = require("../controller/mailController");
 
 router.post("/send", Policy(), async function (req, res, next) {
   let data = await new mailController().send(req.body);
-  //   res.json(data).status(data.status);
   res.json(data);
 });
 

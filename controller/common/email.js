@@ -19,14 +19,28 @@ class Email {
     let messageData = {
       from: this.user + " <" + this.user + ">",
       to: this.user,
-      subject: "New application from ZZ Group website",
-      text: data.message,
-      text: `Name: ${data.name},
-            Company: ${data.company},
-            Email: ${data.company},
-            Phone: ${data.phone},
-            Option: ${data.selectedOption},
-            Message: ${data.message}`,
+      subject: "New application on the ZZ Group website",
+      html: `<div>
+              <p><b>${data.name}</b> 
+              ${
+                data.company
+                  ? "from " + "<b>" + data.company + "</b>" + " company"
+                  : ""
+              } 
+              left a request!</p>
+              <p>Contacts:</p>
+              <ul style='list-style: none'>
+                <li style='margin-left: 10px'>Phone: +${data.phone}</li>
+                <li style='margin-left: 10px'>Email: ${data.email}</li>
+              </ul>
+              <p>${
+                data.selectedOption
+                  ? "Product of interest: " + data.selectedOption
+                  : ""
+              }</p>
+              <p>
+              ${data.message ? "Message: " + `<i>${data.message}</i>` : ""}</p>
+            </div>`,
     };
 
     transporter.sendMail(messageData, (err) => {
